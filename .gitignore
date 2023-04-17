@@ -1,0 +1,13 @@
+*.exe
+*.json
+.vs
+bin
+Properties
+appsettings.Development
+appsetings
+ASP.NET.csproj.user
+obj
+packages
+*.docx
+*.sln
+
