@@ -5,7 +5,7 @@
 namespace ASP.NET.Migrations
 {
     /// <inheritdoc />
-    public partial class NovaMigration1 : Migration
+    public partial class ADDBD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

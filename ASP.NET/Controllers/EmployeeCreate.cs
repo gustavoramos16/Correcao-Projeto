@@ -9,9 +9,9 @@ namespace ASP.NET.Controllers
     [ApiController]
     public class EmployeeCreate : ControllerBase
     {
-        private readonly EmployeeInterface _remployee;
+        private readonly EmployeeInterface<TeamModel> _remployee;
 
-        public EmployeeCreate(EmployeeInterface repemployee)
+        public EmployeeCreate(EmployeeInterface<TeamModel> repemployee)
         {
             _remployee = repemployee;
         }
@@ -19,14 +19,14 @@ namespace ASP.NET.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<List<EmployeeModel>>> SearchForID(int id)
         {
-            EmployeeModel employee = await _remployee.SearchEmployeeID(id);
+            EmployeeModel employee = await _remployee.SearchID(id);
             return Ok(employee);
         }
 
         [HttpPost]
         public async Task<ActionResult<EmployeeModel>> Register([FromBody] EmployeeModel funcionarioModel)
         {
-            EmployeeModel employee = await _remployee.AddEmployee(funcionarioModel);
+            EmployeeModel employee = await _remployee.Add(funcionarioModel);
             return Ok(employee); 
         }
 
@@ -34,7 +34,7 @@ namespace ASP.NET.Controllers
         public async Task<ActionResult<EmployeeModel>> Update([FromBody] EmployeeModel employeeModel, int id)
         {
             employeeModel.Id = id;
-            EmployeeModel employee = await _remployee.UpdateEmployee(employeeModel, id);
+            EmployeeModel employee = await _remployee.Update(employeeModel, id);
             return Ok(employee);
         }
 
@@ -42,7 +42,7 @@ namespace ASP.NET.Controllers
 
         public async Task<ActionResult<EmployeeModel>> Delete([FromBody] EmployeeModel employeeModel, int id)
         {
-            bool delete = await _remployee.DeleteEmployee(id);
+            bool delete = await _remployee.Delete(id);
             return Ok(delete);
         }
     }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASP.NET.Repositorios
 {
-    public class REmployee : EmployeeInterface
+    public class REmployee : EmployeeInterface<EmployeeModel>
     {
         private readonly SistemaDB _database;
 
@@ -14,12 +14,12 @@ namespace ASP.NET.Repositorios
             _database = EmployeeSystem;
         }
 
-        public async Task<List<EmployeeModel>> ViewAllEmployee()
+        public async Task<List<EmployeeModel>> ViewAll()
         {
             return await _database.Employees.ToListAsync();
         }
 
-        public async Task<EmployeeModel> SearchEmployeeID(int id)
+        public async Task<EmployeeModel> SearchID(int id)
         {
             return await _database.Employees.FirstOrDefaultAsync(b => b.Id == id);
         }
@@ -52,7 +52,7 @@ namespace ASP.NET.Repositorios
 
         }
 
-        public async Task<EmployeeModel> AddEmployee(EmployeeModel employee)
+        public async Task<EmployeeModel> Add(EmployeeModel employee)
         {
             NameVerification(employee);
             _database.Employees.Add(employee);
@@ -60,9 +60,9 @@ namespace ASP.NET.Repositorios
             return employee;
         }
 
-        public async Task<EmployeeModel> UpdateEmployee(EmployeeModel employee, int id)
+        public async Task<EmployeeModel> Update(EmployeeModel employee, int id)
         {
-            EmployeeModel EmployeeID = await SearchEmployeeID(id);
+            EmployeeModel EmployeeID = await SearchID(id);
 
             NameVerification(EmployeeID);
 
@@ -80,9 +80,9 @@ namespace ASP.NET.Repositorios
             return EmployeeID;
         }
 
-        public async Task<bool> DeleteEmployee(int id)
+        public async Task<bool> Delete(int id)
         {
-            EmployeeModel funcionarioID = await SearchEmployeeID(id);
+            EmployeeModel funcionarioID = await SearchID(id);
 
             if (funcionarioID == null)
             {

@@ -1,17 +1,9 @@
 ﻿using ASP.NET.NovaPasta;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ASP.NET.Repositorios.Interfaces
 {
-    public interface EmployeeInterface
+    public interface EmployeeInterface<T> : IGeneric<EmployeeModel>
     {
-        Task<List<EmployeeModel>> ViewAllEmployee();
-
-        Task<EmployeeModel> SearchEmployeeID(int id);
-
-        Task<EmployeeModel> AddEmployee(EmployeeModel funcionario);
-
-        Task<EmployeeModel> UpdateEmployee(EmployeeModel funcionario, int id);
-
-        Task<bool> DeleteEmployee(int id);
     }
 }

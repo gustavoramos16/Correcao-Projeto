@@ -9,9 +9,9 @@ namespace ASP.NET.Controllers
     [ApiController]
     public class TeamCreate : ControllerBase
     {
-        private readonly TeamInterface _rteam;
+        private readonly TeamInterface<TeamModel> _rteam;
 
-        public TeamCreate(TeamInterface rteam)
+        public TeamCreate(TeamInterface<TeamModel> rteam)
         {
             _rteam = rteam;
         }
@@ -19,14 +19,14 @@ namespace ASP.NET.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<List<TeamModel>>> SearchForID(int id)
         {
-            TeamModel team = await _rteam.SearchTeamID(id);
+            TeamModel team = await _rteam.SearchID(id);
             return Ok(team);
         }
 
         [HttpPost]
         public async Task<ActionResult<TeamModel>> Register([FromBody] TeamModel equipeModel)
         {
-            TeamModel team = await _rteam.AddTeam(equipeModel);
+            TeamModel team = await _rteam.Add(equipeModel);
             return Ok(team);
         }
 
@@ -34,7 +34,7 @@ namespace ASP.NET.Controllers
         public async Task<ActionResult<TeamModel>> Update([FromBody] TeamModel equipeModel, int id)
         {
             equipeModel.Id = id;
-            TeamModel team = await _rteam.UpdateTeam(equipeModel, id);
+            TeamModel team = await _rteam.Update(equipeModel, id);
             return Ok(team);
         }
 
@@ -42,7 +42,7 @@ namespace ASP.NET.Controllers
 
         public async Task<ActionResult<TeamModel>> Delete([FromBody] TeamModel equipeModel, int id)
         {
-            bool del = await _rteam.DeleteTeam(id);
+            bool del = await _rteam.Delete(id);
             return Ok(del);
         }
     }

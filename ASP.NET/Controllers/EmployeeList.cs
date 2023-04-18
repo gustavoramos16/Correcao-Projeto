@@ -9,9 +9,9 @@ namespace ASP.NET.Controllers
     [ApiController]
     public class EmployeesList : ControllerBase
     {
-        private readonly EmployeeInterface _funcionariorep;
+        private readonly EmployeeInterface<EmployeeModel> _funcionariorep;
 
-        public EmployeesList(EmployeeInterface funcionariorep)
+        public EmployeesList(EmployeeInterface<EmployeeModel> funcionariorep)
         {
             _funcionariorep = funcionariorep;
         }
@@ -19,7 +19,7 @@ namespace ASP.NET.Controllers
         [HttpGet]
         public async Task<ActionResult<List<EmployeeModel>>> ExibirFuncionarios()
         {
-            List<EmployeeModel> funcionarios = await _funcionariorep.ViewAllEmployee();
+            List<EmployeeModel> funcionarios = await _funcionariorep.ViewAll();
             return Ok(funcionarios);
         }
     }

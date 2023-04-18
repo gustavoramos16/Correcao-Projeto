@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASP.NET.Repositorios
 {
-    public class RTeam : TeamInterface
+    public class RTeam : TeamInterface<TeamModel>
     {
         private readonly SistemaDB _database;
         public RTeam(SistemaDB TeamSystem)
@@ -13,12 +13,12 @@ namespace ASP.NET.Repositorios
             _database = TeamSystem;
         }
 
-        public async Task<List<TeamModel>> ViewAllTeams()
+        public async Task<List<TeamModel>> ViewAll()
         {
             return await _database.Teams.ToListAsync();
         }
 
-        public async Task<TeamModel> SearchTeamID(int id)
+        public async Task<TeamModel> SearchID(int id)
         {
             return await _database.Teams.FirstOrDefaultAsync(b => b.Id == id);
         }
@@ -39,13 +39,17 @@ namespace ASP.NET.Repositorios
         {
             if (IDverificator != null)
             {
-                IDverificator = IDverificator;
+                return IDverificator;
+            }
+            else
+            {
+                throw new Exception("id invalido");
             }
 
-            return IDverificator;
+            
         }
 
-        public async Task<TeamModel> AddTeam(TeamModel equipe)
+        public async Task<TeamModel> Add(TeamModel equipe)
         {
             NameVerification(equipe);
             _database.Teams.Add(equipe);
@@ -53,10 +57,10 @@ namespace ASP.NET.Repositorios
             return equipe;
         }
 
-        public async Task<TeamModel> UpdateTeam(TeamModel equipe, int id)
+        public async Task<TeamModel> Update(TeamModel equipe, int id)
         {
             
-            TeamModel equipeID = await SearchTeamID(id);
+            TeamModel equipeID = await SearchID(id);
 
             NameVerification(equipe);
             IDVerification(equipeID);
@@ -69,9 +73,9 @@ namespace ASP.NET.Repositorios
             return equipeID;
         }
 
-        public async Task<bool> DeleteTeam(int id)
+        public async Task<bool> Delete(int id)
         {
-            TeamModel equipeID = await SearchTeamID(id);
+            TeamModel equipeID = await SearchID(id);
 
             IDVerification(equipeID);
 

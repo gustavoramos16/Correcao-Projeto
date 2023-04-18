@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NET.Migrations
 {
     [DbContext(typeof(SistemaDB))]
-    [Migration("20230417195440_NovaMigration1")]
-    partial class NovaMigration1
+    [Migration("20230417232238_ADDBD")]
+    partial class ADDBD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
 using ASP.NET.Data;
+using ASP.NET.NovaPasta;
 using ASP.NET.Repositorios;
 using ASP.NET.Repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,15 @@ namespace ASP.NET
 
             //Relação de dependência
 
-            builder.Services.AddScoped<TeamInterface, RTeam>();
-            builder.Services.AddScoped<EmployeeInterface, REmployee>();
+            builder.Services.AddScoped<TeamInterface<TeamModel>, RTeam>();
+            builder.Services.AddScoped<EmployeeInterface<EmployeeModel>, REmployee>();
+
+           
+            //var serviceCollection = new ServiceCollection();
+            //serviceCollection.AddScoped<TeamInterface<TeamModel>, RTeam>();
+            //serviceCollection.AddScoped<EmployeeInterface<EmployeeModel>, REmployee>();
+
+           
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

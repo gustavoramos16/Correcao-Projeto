@@ -9,9 +9,9 @@ namespace ASP.NET.Controllers
     [ApiController]
     public class TeamsList: ControllerBase
     {
-        private readonly TeamInterface _equiperep;
+        private readonly TeamInterface<TeamModel> _equiperep;
 
-        public TeamsList(TeamInterface equiperep)
+        public TeamsList(TeamInterface<TeamModel> equiperep)
         {
             _equiperep = equiperep;
         }
@@ -19,7 +19,7 @@ namespace ASP.NET.Controllers
         [HttpGet]
         public async Task<ActionResult<List<TeamModel>>> ExibirEquipes()
         {
-            List<TeamModel> equipes = await _equiperep.ViewAllTeams();
+            List<TeamModel> equipes = await _equiperep.ViewAll();
             return Ok(equipes);
         }
     }
